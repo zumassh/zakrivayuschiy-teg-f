@@ -1,16 +1,419 @@
 /* Здесь вы напишете основную часть стилей страницы.
 
 Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
-✦ like-icon — для svg-иконки анимированного сердца
-✦ card__like-button — для кнопки Like рядом с иконкой
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ card__icon-button — для кнопки, оборачивающей иконку
+✦ like-icon — для svg-иконки анимированного сердца +
+✦ card__like-button — для кнопки Like рядом с иконкой  +
+✦ card__icon-button — для кнопки, оборачивающей иконку +
+✦ card__icon-button — для кнопки, оборачивающей иконку +
 ✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
-✦ button__text — для обозначения текстового элемента внутри кнопки
+✦ button__text — для обозначения текстового элемента внутри кнопки +
 
 */
+@keyframes heart-like {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.25);
+  }
+}
+
+@keyframes sparkling {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
 
 .page {
   min-inline-size: 320px;
   min-block-size: 100dvb;
+  font-family: var(--main-font), sans-serif;
+  font-variation-settings: 'wght' var(--text-weight);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: var(--background-image);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.header {
+  font-family: var(--accent-font);
+  min-height: 40vh;
+  display: flex;
+  justify-content: center;
+}
+
+.header-title {
+  margin-top: 100px;
+  background-color: white;
+  border: var(--main-border);
+  width: var(--section-width);
+  height: clamp(20.438rem, 19.535rem + 2.3vw, 32rem);
+  font-size: clamp(0.875rem, 0.677rem + 0.845vw, 1.45rem);
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.accent-title {
+  font-size: clamp(3.063rem, 2.71rem + 1.502vw, 4rem);
+}
+
+main {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.card {
+  border: var(--main-border);
+  width: var(--section-width);
+  overflow: hidden;
+  background-color: white;
+}
+
+.card-title {
+  font-family: var(--main-font), sans-serif;
+  font-variation-settings: 'wght' var(--title-weight, 700);
+  font-size: 18px;
+  line-height: 1.8em;
+  border-bottom: var(--main-border);
+  padding-left: 12px;
+  font-weight: var(--title-weight);
+}
+
+.label-container {
+  min-height: 696px;
+  background-image: var(--card-image);
+  background-size: cover;
+  position: relative;
+  border-bottom: 4px solid black
+}
+
+.card-label {
+  font-family: var(--accent-font);
+  font-size: 14px;
+  position: absolute;
+  top: 27px;
+  right: 25px;
+  mix-blend-mode: hard-light;
+  opacity: 50%;
+  text-shadow: 0 0 var(--label-outline-color);
+}
+
+@supports (-webkit-text-stroke: 1px var(--label-outline-color)) {
+  .card-label {
+    -webkit-text-stroke: 1px var(--label-outline-color);
+  }
+}
+
+.muted {
+  filter: grayscale(75%);
+}
+
+.neon {
+  filter: saturate(250%);
+}
+
+.twilight {
+  filter: hue-rotate(30deg);
+}
+
+.negative {
+  filter: invert(100%) grayscale(50%) brightness(80%);
+}
+
+.blur {
+  filter: blur(1em);
+}
+
+.sepia {
+  filter: sepia(90%);
+}
+
+.fog {
+  filter: hue-rotate(70deg) saturate(110%) sepia(30%);
+}
+
+.card-description {
+  margin: 25px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.description-footer {
+  margin-top: 0.5%;
+  align-self: end;
+  display: flex;
+  align-items: end;
+  gap: 6px;
+}
+
+.standart-button {
+  position: relative;
+}
+
+.standart-button:focus {
+  outline: none;
+  box-shadow: 2px 2px 0 black;
+  transition: box-shadow 0.3s ease;
+}
+
+.standart-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.5s ease-in-out;
+}
+
+.standart-button:hover::before {
+  transform: scaleX(1);
+}
+
+.standart-button span {
+  mix-blend-mode: difference;
+  color: white;
+}
+
+.card__icon-button {
+  background: transparent;
+  border: var(--main-border);
+  border-color: rgba(0, 0, 0, 0);
+  transition: border-color 0.3s ease;
+  will-change: border-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button:focus-visible {
+  border-color: rgba(0, 0, 0, 1);
+}
+
+.like-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.like-icon .sparks {
+  opacity: 0;
+}
+
+.like-icon .contour {
+  fill: var(--contour-color);
+}
+
+.like-icon .core {
+  fill: transparent;
+  transition-property: fill;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
+  transition-delay: 0.03s;
+}
+
+.like-icon .main-body {
+  fill: transparent;
+  transition-property: fill;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
+}
+
+/* наведение */
+.like-icon:hover .core {
+  transition-property: fill;
+  transition-timing-function: linear;
+  transition-duration: 0.3s;
+  transition-delay: 0s;
+  fill: var(--contour-color);
+} 
+
+.like-icon:hover .main-body {
+  transition-property: fill;
+  transition-timing-function: linear;
+  transition-duration: 0.3s;
+  transition-delay: 0.05s;
+  fill: var(--contour-color);
+} 
+
+/* зажатие */
+.like-icon:active .core {
+  transition-property: fill;
+  transition-timing-function: linear;
+  transition-duration: 0.3s;
+  transition-delay: 0s;
+  fill: var(--animation-fill-color);
+} 
+
+.like-icon:active .main-body {
+  transition-property: fill;
+  transition-timing-function: linear;
+  transition-duration: 0.3s;
+  transition-delay: 0.05s;
+  fill: var(--animation-fill-color);
+} 
+
+/* клик */
+.like-icon.is-liked .core {
+  fill: var(--animation-fill-color);
+}
+
+.like-icon.is-liked .main-body {
+  fill: var(--animation-fill-color);
+}
+
+.like-icon.is-liked .contour {
+  transition-delay: 0.06s;
+  fill: var(--animation-fill-color);
+}
+
+.like-icon.is-liked .heart {
+  animation: heart-like 0.3s ease-in 0.1s;
+}
+
+.like-icon.is-liked .sparks {
+  animation: sparkling 0.3s ease-in 0.3s;
+}
+
+.like-icon:not(.is-liked) .contour {
+  transition-timing-function: linear;
+  transition-duration: 0.1s;
+  fill: var(--contour-color);
+}
+
+.card__like-button {
+  font-family: var(--accent-font);
+  font-size: 14px;
+  width: 130px;
+  height: 38px;
+  align-self: flex-start;
+  background-color: transparent;
+  border: var(--main-border)
+}
+
+footer {
+  margin-top: 50px;
+  margin-bottom: 103px;
+  background-color: white;
+}
+
+.footer-button {
+  background: transparent;
+  border: var(--main-border);
+  width: clamp(19.125rem, 18.047rem + 4.601vw, 21rem);
+  min-height: 55px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.footer-button-text {
+  display: flex;
+  font-family: var(--accent-font);
+  font-size: 14px;
+}
+
+.footer-button-text span {
+  margin-left: 8px;
+  padding-top: 4px;
+}
+
+.dialog-container {
+  font-family: var(--accent-font);
+}
+
+.dialog-container::backdrop {
+  background-color: rgb(0 0 0 / 0.5);
+}
+
+.dialog-container[open] {
+  padding: 30px;
+  text-transform: uppercase;
+}
+
+.dialog-container[open] .dialog-title {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 323px;
+  line-height: 150%;
+}
+
+.dialog-title svg {
+  flex-shrink: 0;
+}
+
+.dialog-button {
+  width: 100%;
+  border: var(--main-border);
+  margin-top: 30px;
+  height: 38px;
+  line-height: 90%;
+  background: transparent;
+}
+
+@media (width <= 375px) {
+  .card-title {
+    padding: 4px 10px 6px;
+    line-height: 1.2em;
+  }
+
+  .label-container {
+    min-height: 371px;
+    border-bottom: var(--main-border);
+  }
+
+  .card-label {
+    top: 25px;
+    right: 12px;
+  }
+  
+  .description-footer {
+    align-self: end;
+    display: flex;
+    align-items: end;
+    gap: 6px;
+  }
+
+  .footer-button {
+    padding: 15px 0;
+  }
+
+  .footer-button svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .footer-button-text {
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
 }

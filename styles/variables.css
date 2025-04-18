@@ -1,1 +1,22 @@
 /* В этом файле будут храниться все значения переменных в исходном состоянии, а так же их изменения в зависимости от ширины устройства */
+:root {
+    --main-font: Inter-Variable;
+    --accent-font: PressStart2P-Regular;
+    --text-weight: 400;
+    --title-weight: 700;
+    --card-image: url('../svg/track.svg');
+    --background-image: repeating-linear-gradient(to right, #d3d3d3 0 2px, transparent 2px 4px), 
+    repeating-linear-gradient(to bottom, #d3d3d3 0 2px, transparent 2px 4px),
+    linear-gradient(to bottom, 
+        #e7e7e7 0%, 
+        #e7e7e7 0.01%, 
+        #d0d0d0 20%, 
+        #a0a0a0 50%, 
+        #606060 80%, 
+        #1a1a1a 100%);
+    --main-border: 2px solid black;
+    --section-width: clamp(23.438rem, 16.285rem + 30.516vw, 43.6rem);
+    --label-outline-color: #fff;
+    --contour-color: rgb(0, 0, 0);
+    --animation-fill-color: red;
+}
