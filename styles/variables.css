@@ -1,7 +1,7 @@
 /* В этом файле будут храниться все значения переменных в исходном состоянии, а так же их изменения в зависимости от ширины устройства */
 :root {
     --main-font: Inter-Variable;
-    --accent-font: PressStart2P-Regular;
+    --accent-font: PressStart2P;
     --text-weight: 400;
     --title-weight: 700;
     --card-image: url('../svg/track.svg');
@@ -15,7 +15,7 @@
         #606060 80%, 
         #1a1a1a 100%);
     --main-border: 2px solid black;
-    --section-width: clamp(23.438rem, 16.285rem + 30.516vw, 43.6rem);
+    --section-width: clamp(23.438rem, 16.285rem + 30.516vw, 43.9rem);
     --label-outline-color: #fff;
     --contour-color: rgb(0, 0, 0);
     --animation-fill-color: red;
